@@ -1,0 +1,28 @@
+public class Solution 
+{
+    public double LargestTriangleArea(int[][] points) 
+    {
+        double max = 0;
+        for(int i = 0;i < points.Length-2;i++)
+        {
+            for(int j = i+1;j<points.Length-1;j++)
+            {
+                for(int k = j+1;k < points.Length;k++)
+                {
+                    double tmp = getArea(points[i],points[j],points[k]);
+                    if(tmp > max)
+                    {
+                        max = tmp;
+                    }
+                }
+            }
+        }
+        return max;
+    }
+    
+    public double getArea(int[] p1,int[] p2,int[] p3)
+    {
+        return (double)Math.Abs((p2[0]-p1[0])*(p3[1]-p1[1])-(p3[0]-p1[0])*(p2[1]-p1[1]))/2;
+    }
+    
+}

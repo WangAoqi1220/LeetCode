@@ -1,0 +1,26 @@
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        int[] result = new int[2];
+        Dictionary<int,int> hash = new Dictionary<int,int>();
+        for(int i = 0;i < nums.Length;i++){
+            if(!hash.ContainsKey(nums[i])){
+                hash.Add(nums[i],i);//第一次遍历，将数组中的值作为Key，索引作为值
+            }
+            else{
+                if(nums[i]==target/2){//如果该key已经存在，那么比较其值是否为target的一半，若是，则返回它的位置和与它同值的索引
+                    result[0] = hash[target-nums[i]];
+                    result[1] = i;
+                }
+            }
+            
+        }
+        for(int x = 0;x < nums.Length;x++){
+            int num2 = target - nums[x];
+            if(hash.ContainsKey(num2)&&hash[num2]!=x){//所寻找的num2存在并且不等于x
+                result[0] = hash[num2];
+                result[1] = x;
+            }
+        }
+        return result;
+    }
+}

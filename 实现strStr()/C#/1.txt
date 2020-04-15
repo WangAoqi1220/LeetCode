@@ -1,0 +1,14 @@
+public class Solution 
+{
+    public int StrStr(string haystack, string needle) 
+    {
+        int nlen = needle.Length, hlen = haystack.Length;
+
+        for (int start = 0; start < hlen - nlen + 1; ++start) 
+        {
+            if (haystack.Substring(start, nlen).Equals(needle)) 
+                return start;
+        }
+        return -1;
+    }
+}

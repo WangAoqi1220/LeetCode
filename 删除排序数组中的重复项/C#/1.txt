@@ -1,0 +1,22 @@
+public class Solution {
+    public int RemoveDuplicates(int[] nums) 
+    {
+        if(nums.Length==0) return 0;
+        int prenum = 0,thisnum = 0,pos = 1;
+        for(int i = 1;i < nums.Length;i++)
+        {
+            prenum = nums[i-1];
+            thisnum = nums[i];
+            if(prenum!=thisnum)
+            {
+                nums[pos] = thisnum;
+                pos++;
+            }
+        }
+        for(int j = pos;j < nums.Length;j++)
+        {
+            nums[j] = 0;
+        }
+        return pos;
+    }
+}

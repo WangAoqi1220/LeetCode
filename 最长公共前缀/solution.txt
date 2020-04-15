@@ -1,0 +1,11 @@
+方法一：水平扫描法
+思路
+首先，我们将描述一种查找一组字符串的最长公共前缀
+LCP(S1…Sn)=LCP(LCP(LCP(S1​,S2),S3),…Sn)
+
+方法二：分治
+这个算法的思路来自于LCP操作的结合律。 我们可以发现：
+LCP(S1……Sn) = LCP(LCP(S1……Sk), LCP(S{k+1}Sn))LCP(S1…Sn)=LCP(LCP(S1…Sk),LCP(Sk+1…Sn))
+，其中 LCP(S1……Sn)LCP(S1…Sn) 是字符串 [S1……Sn][S1…Sn] 的最长公共前缀，1 < k < n1<k<n。
+算法
+为了应用上述的结论，我们使用分治的技巧，将原问题 LCP(Si……Sj)分成两个子问题 LCP(Si……S{mid})与 LCP(S{mid+1}, Sj) ，其中 mid = (i+j)/2。我们用子问题的解 lcpLeft 与 lcpRight 构造原问题的解 LCP(Si……S_j)。从头到尾挨个比较 lcpLeft 与 lcpRight 中的字符，直到不能再匹配为止。 计算所得的 lcpLeft 与 lcpRight 最长公共前缀就是原问题的解 LCP(Si……Sj)

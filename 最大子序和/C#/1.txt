@@ -1,0 +1,15 @@
+public class Solution 
+{
+    public int MaxSubArray(int[] nums) 
+    {
+        int len = nums.Length;
+        int currmax = nums[0];
+        int max = nums[0];
+        for(int i = 1;i < len;i++)
+        {
+            currmax = nums[i] > currmax + nums[i] ? nums[i] : currmax + nums[i];
+            max = max > currmax ? max : currmax;
+        }
+        return max;
+    }
+}

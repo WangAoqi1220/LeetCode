@@ -1,0 +1,29 @@
+public class Solution 
+{
+    public int[] PlusOne(int[] digits) 
+    {
+        int pos = digits.Length-1;
+        if(digits[pos] != 9)
+        {
+            digits[pos]++;
+            return digits;
+        }
+        else
+        {
+            while(pos>=0&&digits[pos] == 9)
+            {   
+                digits[pos] = 0;
+                pos--;
+            }
+            if(pos >= 0)
+            digits[pos]++;
+            else
+            {
+                int[] answer =new int[digits.Length+1];
+                answer[0] = 1;
+                return answer;
+            }
+        }
+        return digits;
+    }
+}

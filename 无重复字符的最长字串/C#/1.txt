@@ -1,0 +1,25 @@
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        int maxlen=1,start=0;
+        int len=s.Length;
+        if(len>0)
+        {
+            for(int end=1;end<len;end++)
+            {
+                char c = s[end];
+                int index = s.IndexOf(c,start);
+                if(index<end)
+                {
+                    start = index+1;
+                }
+                int tmp = end-start+1;
+                maxlen=tmp>maxlen?tmp:maxlen;
+            }
+        }
+        else
+        {
+            maxlen=0;
+        }
+        return maxlen;
+    }
+}

@@ -1,0 +1,26 @@
+public class Solution 
+{
+    public string CountAndSay(int n) 
+    {
+        if(n == 1) return "1";
+        string preNum = CountAndSay(n-1);
+        StringBuilder result = new StringBuilder();
+        char head = preNum[0];
+        int count = 1;
+        for(int i = 1;i < preNum.Length;i++)
+        {
+            if(head == preNum[i])
+            {
+                count++;
+            }
+            else
+            {
+                result.Append(""+count+head);
+                head = preNum[i];
+                count = 1;
+            }
+        }
+        result.Append(""+count+head);
+        return result.ToString();
+    }
+}

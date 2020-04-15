@@ -1,0 +1,14 @@
+public class Solution {
+    public int MaxProfit(int[] prices) {
+        int preprice = 0,nowprice = 0;
+        int profit = 0;
+        for(int i = 1;i < prices.Length;i++)
+        {
+            preprice = prices[i-1];
+            nowprice = prices[i];
+            if(nowprice>preprice)
+                profit += nowprice-preprice;
+        }
+        return profit;
+    }
+}

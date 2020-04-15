@@ -1,0 +1,37 @@
+public class Solution 
+{
+    public int CrossSum(int[] nums, int left, int right, int p)
+    {
+        if (left == right) return nums[left];
+        int leftSubsum = -2147483648;
+        int currSum = 0;
+        for(int i = p; i > left - 1; --i) 
+        {
+            currSum += nums[i];
+            leftSubsum = Math.Max(leftSubsum, currSum);
+        }
+        int rightSubsum = -2147483648;
+        currSum = 0;
+        for(int i = p + 1; i < right + 1; ++i) 
+        {
+            currSum += nums[i];
+            rightSubsum = Math.Max(rightSubsum, currSum);
+        }
+        return leftSubsum + rightSubsum;
+    }
+
+  public int helper(int[] nums, int left, int right) 
+  {
+        if (left == right) return nums[left];
+        int p = (left + right) / 2;
+        int leftSum = helper(nums, left, p);
+        int rightSum = helper(nums, p + 1, right);
+        int crossSum = CrossSum(nums, left, right, p);
+        return Math.Max(Math.Max(leftSum, rightSum), crossSum);
+  }
+
+  public int MaxSubArray(int[] nums) 
+  {
+    return helper(nums, 0, nums.Length - 1);
+  }
+}
