@@ -1,0 +1,18 @@
+public class Solution 
+{
+    public int FindContentChildren(int[] g, int[] s) 
+    {
+        Array.Sort(g);
+        Array.Sort(s);
+        int canFeed = 0,slen = s.Length,glen = g.Length;
+        for(int j = 0;j < slen;j++)
+        {
+            if(canFeed < glen&&s[j] >= g[canFeed])
+            {
+                canFeed++;
+            }
+        }
+        return canFeed;
+    }
+    
+}
