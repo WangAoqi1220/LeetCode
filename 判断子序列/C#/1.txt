@@ -1,0 +1,24 @@
+public class Solution 
+{
+    public bool IsSubsequence(string s, string t) 
+    {
+        int slen = s.Length,tlen = t.Length;
+        if(slen==0) return true;
+        else if(tlen==0) return false;
+        char index = s[0];
+        int head = 0;
+        for(int i = 0;head < slen&&i < tlen;i++)
+        {
+            if(index.Equals(t[i]))
+            {
+                head++;
+                if(head < slen)
+                    index = s[head];
+            }
+        }
+        if(head < slen)
+            return false;
+        else 
+            return true;
+    }
+}
