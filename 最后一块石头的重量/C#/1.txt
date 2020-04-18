@@ -1,0 +1,22 @@
+public class Solution 
+{
+    public int LastStoneWeight(int[] stones) 
+    {
+        Array.Sort(stones);
+        for(int i = stones.Length-1;i > 0;i--)
+        {
+            if(stones[i]==stones[i-1])
+            {
+                if(i==1)
+                stones[0] = 0;
+                i--;
+            }
+            else
+            {
+                stones[i-1] = stones[i] - stones[i-1];
+            }
+            Array.Sort(stones);
+        }
+        return stones[0];
+    }
+}
