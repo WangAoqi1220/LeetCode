@@ -1,0 +1,15 @@
+public class Solution 
+{
+    public int SmallestRangeI(int[] A, int K) 
+    {
+        int min = 10000,max = 0;
+        for(int i = 0;i < A.Length;i++)
+        {
+            if(A[i] > max)
+                max= A[i];
+            if(A[i] < min)
+                min = A[i];
+        }
+        return max-min-2*K>0?max-min-2*K:0;
+    }
+}
