@@ -1,0 +1,32 @@
+public class Solution 
+{
+    public int LargestSumAfterKNegations(int[] A, int K) 
+    {
+        int sum = 0,pos = 0,len = A.Length;
+        Array.Sort(A);
+        while(K>0)
+        {
+            if(A[pos] < 0&&pos < len)
+            {
+                A[pos] = -A[pos];
+                pos++;
+                K--;
+            }
+            else if(K%2==0)
+            {
+                break;
+            }
+            else
+            {
+                Array.Sort(A);
+                A[0] = -A[0];
+                break;
+            }
+        }
+        for(int i = 0;i < len;i++)
+        {
+            sum += A[i];
+        }
+        return sum;
+    }
+}

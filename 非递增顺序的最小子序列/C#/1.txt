@@ -1,0 +1,21 @@
+public class Solution 
+{
+    public IList<int> MinSubsequence(int[] nums) 
+    {
+        List<int> answer = new List<int>();
+        int sum = 0,partsum = 0,len = nums.Length;
+        for(int i = 0;i < len;i++)
+        {
+            sum+=nums[i];
+        }
+        Array.Sort(nums);
+        for(int j = len-1;j>=0;j--)
+        {
+            partsum+=nums[j];
+            answer.Add(nums[j]);
+            if(partsum>=sum/2+1)
+                break;
+        }
+        return answer;
+    }
+}
