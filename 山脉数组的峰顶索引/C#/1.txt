@@ -1,0 +1,23 @@
+public class Solution 
+{
+    public int PeakIndexInMountainArray(int[] A) 
+    {
+        int pos = A.Length/2;
+        int range = pos;
+        int index = A[pos];
+        while(index<A[pos-1]||index<A[pos+1])
+        {  
+            range = range/2>1?range/2:1;
+            if(pos>0&&index<A[pos-1])
+            {
+                pos -= range;
+            }
+            else
+            {
+                pos += range;
+            }
+            index = A[pos];
+        }
+        return pos;
+    }
+}

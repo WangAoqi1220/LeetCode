@@ -1,0 +1,16 @@
+public class Solution 
+{
+    public int FindRepeatNumber(int[] nums) 
+    {
+        int answer = 0;
+        HashSet<int> hashSet = new HashSet<int>();
+        for(int i = 0;i < nums.Length;i++)
+        {
+            if(!hashSet.Add(nums[i]))
+            {
+                answer = nums[i];
+            }
+        }
+        return answer;
+    }
+}
