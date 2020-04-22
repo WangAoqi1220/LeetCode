@@ -1,0 +1,22 @@
+public class Solution 
+{
+    public int[] DivingBoard(int shorter, int longer, int k) 
+    {
+        if(k==0)
+        {
+            return new int[0];
+        }
+        if(shorter == longer)
+        {
+            return new int[1]{k*shorter};
+
+        }
+        int[] answer = new int[k+1];
+        answer[0] = k*shorter;
+        for(int i = 1;i < k+1;i++)
+        {
+            answer[i] = answer[i-1] + longer - shorter;
+        }
+        return answer;
+    }
+}
