@@ -1,0 +1,13 @@
+class Solution {
+    public int singleNumber(int[] nums) {
+        Map<Integer, Object> map = new HashMap<>();
+        for (int num : nums) {
+            if (!map.containsKey(num)) {
+                map.put(num, null);
+            } else {
+                map.remove(num);
+            }
+        }
+        return map.keySet().iterator().next();
+    }  
+}
