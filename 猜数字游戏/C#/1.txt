@@ -1,0 +1,26 @@
+public class Solution 
+{
+    public string GetHint(string secret, string guess) 
+    {
+        int slen = secret.Length,Anum =  0,Bnum = 0;
+        int[] seenA = new int[10];
+        int[] seenB = new int[10];
+        for(int i = 0;i < slen;i++)
+        {
+            if(secret[i].Equals(guess[i]))
+            {
+                Anum++;
+            }
+            else
+            {
+                seenA[secret[i]-'0']++;
+                seenB[guess[i]-'0']++;
+            }
+        }
+        for(int j = 0;j < 10;j++)
+        {
+            Bnum += Math.Min(seenA[j],seenB[j]);
+        }
+        return Anum + "A" + Bnum + "B";
+    }
+}
