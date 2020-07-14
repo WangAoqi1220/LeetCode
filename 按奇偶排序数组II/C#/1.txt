@@ -1,0 +1,30 @@
+public class Solution 
+{
+    public int[] SortArrayByParityII(int[] A) 
+    {
+        int len = A.Length;
+        int odd = 1,even = 0;
+        for(;even < len;even += 2)
+        {
+            if(A[even]%2!=0)
+            {
+                for(;odd<len;odd += 2)
+                {
+                    if(A[odd]%2!=1)
+                    {
+                        Swag(A,even,odd);
+                        break;
+                    }
+                }
+            }           
+        }
+        return A;
+    }
+    
+    public void Swag(int[] A,int pos1,int pos2)
+    {
+        int index = A[pos1];
+        A[pos1] = A[pos2];
+        A[pos2] = index;
+    }
+}

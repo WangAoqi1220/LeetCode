@@ -1,0 +1,31 @@
+public class Solution 
+{
+    public int[][] FlipAndInvertImage(int[][] A) 
+    {
+        int len = A[0].Length;
+        for(int i  = 0;i < len;i++)
+        {
+            int head = 0,tail = len-1;
+            while(head<tail)
+            {
+                swag(A[i],head,tail);
+                head++;
+                tail--;
+            }
+            for(int j = 0;j < len;j++)
+            {
+                A[i][j] = (A[i][j]+1)%2;
+            }
+        }
+        
+        
+        return A;
+    }
+    
+    public void swag(int[] A,int head,int tail)
+    {
+        int index = A[head];
+        A[head] = A[tail];
+        A[tail] = index;
+    }
+}
