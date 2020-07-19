@@ -1,0 +1,24 @@
+public class Solution 
+{
+    public int RepeatedNTimes(int[] A) 
+    {
+        int index = A[0],count = 1,len = A.Length;
+        for(int i = 1;i < len;i++)
+        {
+            if(index == A[i])
+                count++;
+            else if(--count == 0)
+            {
+                index = A[i];
+                count = 1;
+            }
+        }
+        if(count > 1) return index;
+        count = 0;
+        for(int j = 0;j < len;j++)
+        {
+            count += index==A[j]?1:0;
+        }
+        return count>1?index:A[0];
+    }
+}

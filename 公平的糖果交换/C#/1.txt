@@ -1,0 +1,20 @@
+public class Solution 
+{
+    public int[] FairCandySwap(int[] A, int[] B) 
+    {
+        int a = 0,b = 0;
+        for(int i = 0;i < A.Length;i++)
+            a += A[i];
+        for(int j = 0;j < B.Length;j++)
+            b += B[j];
+        int delta = (b-a)/2;
+        HashSet<int> hash = new HashSet<int>();
+        for(int k = 0;k < B.Length;k++)
+            hash.Add(B[k]);
+        for(int m = 0;m < A.Length;m++)
+            if(hash.Contains(A[m]+delta))
+                return new int[]{A[m],A[m]+delta};
+        return null;
+        
+    }
+}
