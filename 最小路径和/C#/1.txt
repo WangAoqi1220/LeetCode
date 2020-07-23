@@ -1,0 +1,17 @@
+public class Solution 
+{
+    public int MinPathSum(int[][] grid) 
+    {
+        int col = grid[0].Length,row = grid.Length;
+        int[,] path = new int[row,col];
+        path[0,0] = grid[0][0];
+        for(int n = 1;n < col;n++)
+            path[0,n] = path[0,n-1]+grid[0][n];
+        for(int m = 1;m < row;m++)
+            path[m,0] = path[m-1,0]+grid[m][0];
+        for(int i = 1;i < row;i++)
+            for(int j = 1;j < col;j++)
+                path[i,j] = Math.Min(path[i-1,j],path[i,j-1])+grid[i][j];   
+        return path[row-1,col-1];
+    }
+}
