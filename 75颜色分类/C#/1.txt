@@ -1,0 +1,46 @@
+public class Solution 
+{
+    public void SortColors(int[] nums) 
+    {
+        int zeroNum = 0, oneNum = 0, twoNum = 0;
+        for(int i = 0;i < nums.Length;i++)
+        {
+            switch(nums[i])
+            {
+                case 0:
+                    {
+                        zeroNum++;
+                        break;
+                    }
+                case 1:
+                    {
+                        oneNum++;
+                        break;
+                    }
+                case 2:
+                    {
+                        twoNum++;
+                        break;
+                    }
+            }
+        }
+        for(int j = 0; j < nums.Length; j++)
+        {
+            if(zeroNum > 0)
+            {
+                nums[j] = 0;
+                zeroNum--;
+            }
+            else if(oneNum > 0)
+            {
+                nums[j] = 1;
+                oneNum--;
+            }
+            else if(twoNum > 0)
+            {
+                nums[j] = 2;
+                twoNum--;
+            }
+        }
+    }
+}

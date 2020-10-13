@@ -1,0 +1,43 @@
+public class Solution {
+    public int MovingCount(int m, int n, int k) 
+    {
+        if(k <0||m <= 0||n <=0)
+            return 0;
+        bool[,] visited = new bool[m,n];
+        int count = MovingCount( k, m, n, 0, 0, visited);
+        return count;
+        
+    }
+    
+    int MovingCount(int k, int row, int col, int x, int y, bool[,] visited )
+    {
+        int count = 0;
+        if(Check( k, row, col, x, y, visited))
+        {
+            visited[x,y] = true;
+            
+            count = 1 + MovingCount( k,  row,  col,  x - 1,  y,  visited )
+                      + MovingCount( k, row, col, x + 1, y, visited )
+                      + MovingCount( k, row, col, x, y - 1, visited )
+                      + MovingCount( k, row, col, x, y + 1, visited );
+        }
+        return count;
+    }
+        
+    bool Check(int k, int row, int col, int x, int y,bool[,] visited)
+    {
+        if(x >= 0&&x < row&&y >= 0&&y < col&&GetDigitSum(x) + GetDigitSum(y) <= k&&!visited[x,y])
+            return true;
+        return false;
+    }
+    int GetDigitSum(int num)
+    {
+        int sum = 0;
+        while(num > 0)
+        {
+            sum += num%10;
+            num /= 10;
+        }
+        return sum;
+    }
+}

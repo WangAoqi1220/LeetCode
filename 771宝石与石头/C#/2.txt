@@ -1,0 +1,19 @@
+public class Solution {
+    public int NumJewelsInStones(string J, string S) {
+        Dictionary<char, int> d = new Dictionary<char,int>();
+        for(int i=0;i<S.Length;++i)
+        {
+            if(d.ContainsKey(S[i]))
+                d[S[i]]++;
+            else
+                d.Add(S[i],1);
+        }
+        int count=0;
+        for(int i=0;i<J.Length;++i)
+        {
+            if(d.ContainsKey(J[i]))
+                count+=d[J[i]];
+        }
+        return count;
+    }
+}

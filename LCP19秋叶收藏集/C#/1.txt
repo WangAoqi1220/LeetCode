@@ -1,0 +1,18 @@
+public class Solution 
+{
+    public int MinimumOperations(string leaves) 
+    {
+        int len = leaves.Length;
+        int firstR = (leaves[0] == 'r')?0:1, secondY = int.MaxValue, thirdR = int.MaxValue;
+        for(int i = 1; i < len; i++)
+        {
+            int isRed = (leaves[i] == 'r')?1:0;
+            int isYellow = (leaves[i] == 'y')?1:0;
+            if(i >= 2)
+                thirdR = Math.Min(secondY,thirdR) + isYellow;
+            secondY = Math.Min(firstR,secondY) + isRed;
+            firstR += isYellow;            
+        }
+        return thirdR;
+    }
+}

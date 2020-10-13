@@ -1,0 +1,31 @@
+public class Solution 
+{
+    public string ReplaceSpace(string s) 
+    {
+        int originalLength = s.Length;
+        if(originalLength <= 0||s == null)
+            return "";
+        int blankNum = 0;
+        for(int i = 0; i < originalLength; i++)
+            if(s[i] == ' ')
+                blankNum++;
+        int newLength = blankNum * 2 + originalLength;
+        char[] ans = new char[newLength];
+        int indexOfOriginal = originalLength - 1;
+        int indexOfNew = newLength - 1;
+        while(indexOfOriginal >= 0)
+        {
+            if(s[indexOfOriginal] == ' ')
+            {
+                ans[indexOfNew--] = '0';
+                ans[indexOfNew--] = '2';
+                ans[indexOfNew--] = '%';
+            }
+            else
+                ans[indexOfNew--] = s[indexOfOriginal];
+            indexOfOriginal--;
+        }
+        string str = new string(ans,0,newLength);
+        return str;
+    }
+}

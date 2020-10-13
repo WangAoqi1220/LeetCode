@@ -1,0 +1,32 @@
+public class CQueue 
+{
+    private Stack<int> inStack = new Stack<int>();
+    private Stack<int> outStack = new Stack<int>();
+    public CQueue() 
+    {
+        
+    }    
+    public void AppendTail(int value) 
+    {
+        inStack.Push(value);
+    }
+    
+    public int DeleteHead() 
+    {
+        if(outStack.Count == 0)
+        {
+            while(inStack.Count > 0)
+                outStack.Push(inStack.Pop());
+        }
+        if(outStack.Count == 0)
+            return -1;
+        return outStack.Pop();
+    }
+}
+
+/**
+ * Your CQueue object will be instantiated and called as such:
+ * CQueue obj = new CQueue();
+ * obj.AppendTail(value);
+ * int param_2 = obj.DeleteHead();
+ */

@@ -1,0 +1,23 @@
+public class Solution 
+{
+    public double MyPow(double x, int n) 
+    {
+        if(x.Equals(0.0))
+            return 0.0;
+        long absn = n;
+        if(absn < 0)
+        {
+            absn = -absn;
+            x = 1/x;
+        }       
+        double res = 1.0;
+        while(absn > 0)
+        {
+            if((absn & 1) == 1)
+                res *= x;
+            x*=x;
+            absn >>= 1;
+        }
+        return res;
+    }
+}

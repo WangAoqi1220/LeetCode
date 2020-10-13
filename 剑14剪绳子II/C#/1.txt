@@ -1,0 +1,22 @@
+public class Solution 
+
+{
+    public int CuttingRope(int n) 
+    {
+        if(n == 1||n == 2)
+            return 1;
+        if(n == 3)
+            return 2;
+        int timeOf3 = n/3;
+        if(n%3 == 1)
+            timeOf3--;
+        int numLeft = (n - 3 * timeOf3)>0?(n - 3 * timeOf3):1;
+        long res = 1;
+        for(int i = 0; i < timeOf3; i++)
+        {
+            res = (res * 3)%1000000007;
+        }
+        res = (res * numLeft)%1000000007;
+        return (int)res;
+    }
+}

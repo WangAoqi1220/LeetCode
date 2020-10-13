@@ -1,0 +1,42 @@
+public class Solution 
+{
+    int[] result = new int[2];
+    public int[] FindRedundantConnection(int[][] edges) 
+    {
+        int[] father = new int[edges.Length + 1];
+        for (int i = 0; i < father.Length; i++) 
+        {
+            father[i] = i;
+        }
+        for (int j = 0; j < edges.Length; j++) 
+        {
+            union(father, edges[j][0], edges[j][1]);
+        }
+        return result;
+    }
+    //路径压缩
+    public int findXFather(int[] father, int x) 
+    {
+        while (father[x]!=x)
+        {
+            father[x] = father[father[x]];
+            x = father[x];
+        }
+        return x;
+    }
+
+    //合并两个能连接上的点，father合为最后确定的father
+    public void union(int[] father, int x, int y) 
+    {
+        int xFather = findXFather(father, x);
+        int yFather = findXFather(father, y);
+        if (xFather != yFather) 
+            father[xFather]=yFather;
+        else 
+        {
+            //在发现两个点的连接已经存在时，就更新缓存，题目要最后一个，遍历到最后一个就是结果
+            result[0] = x;
+            result[1] = y;
+        }
+    }
+}

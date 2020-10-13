@@ -1,0 +1,41 @@
+public class Solution 
+{
+    public bool IsPalindrome(string s) 
+    {
+        s = s.Replace(" ","").ToUpper();
+        int head = 0,tail = s.Length - 1;
+        while(head < tail)
+        {
+            while(!IsLetterOrDigit(s[head])&&head < tail)
+                head++;                
+            while(!IsLetterOrDigit(s[tail])&&head < tail)
+                tail--;
+            if(head >= tail)
+                return true;
+            if(IsEquals(s[head],s[tail]))                
+            {
+                head++;
+                tail--;
+            }
+            else
+                return false;
+        }
+        return true;
+        
+    }
+    
+    bool IsLetterOrDigit(char c)
+    {
+        if((c >= 65 && c <= 90)||(c >= 48 && c <= 57))
+            return true;
+        return false;
+    }
+    
+    bool IsEquals(char c1, char c2)
+    {
+        if(c1 == c2)
+            return true;
+        return false;
+    }
+        
+}

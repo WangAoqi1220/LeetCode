@@ -1,0 +1,13 @@
+public class Solution 
+{
+    public void ReverseString(char[] s) 
+    {
+        int head = 0,tail = s.Length - 1;
+        while(head < tail)
+        {
+            char tmp = s[head];
+            s[head++] = s[tail];
+            s[tail--] = tmp;
+        }
+    }
+}

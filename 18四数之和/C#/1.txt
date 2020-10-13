@@ -1,0 +1,40 @@
+public class Solution 
+{
+    public IList<IList<int>> FourSum(int[] nums, int target) 
+    {
+        int len = nums.Length;
+        IList<IList<int>> ans = new List<IList<int>>();
+        if(len < 4 || nums == null)
+            return ans;
+        Array.Sort(nums);
+        for(int i = 0; i < len - 3; i++)
+        {
+            if(i > 0&&nums[i] == nums[i-1]) continue;
+            for(int j = i + 1; j < len - 2; j++)
+            {
+                if(j > i + 1&&nums[j] == nums[j-1]) continue;
+                int head = j + 1;
+                int tail = len - 1;
+                while(head < tail)
+                {
+                    int sum = nums[i] + nums[j] + nums[head] + nums[tail];
+                    
+                    if(sum == target)
+                    {
+                        ans.Add(new List<int>{nums[i], nums[j], nums[head], nums[tail]});
+                        while(head < tail&&nums[head] == nums[head+1]) head++;
+                        while(head < tail&&nums[tail] == nums[tail-1]) tail--;
+                        head++;
+                        tail--;                    
+                    }
+                    else if(sum > target)
+                        tail--;
+                    else
+                        head++;
+                    
+                }
+            }
+        }
+        return ans;
+    }
+}

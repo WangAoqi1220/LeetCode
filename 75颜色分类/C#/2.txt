@@ -1,0 +1,25 @@
+public class Solution 
+{
+    public void SortColors(int[] nums) 
+    {
+        int head = 0, tail = nums.Length - 1;
+        for(int i = 0;i <= tail;i++)
+        {
+            switch(nums[i])
+            {
+                case 0:
+                    {
+                        nums[i] = nums[head];
+                        nums[head++] = 0;
+                        break;
+                    }
+                case 2:
+                    {
+                        nums[i--] = nums[tail];
+                        nums[tail--] = 2;
+                        break;
+                    }
+            }
+        }
+    }
+}
