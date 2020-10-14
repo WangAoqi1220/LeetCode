@@ -1,0 +1,35 @@
+public class Solution 
+{
+    public IList<string> CommonChars(string[] A) 
+    {
+        int[] preCount = new int[26];
+        int[] nowCount = new int[26];
+        for(int i = 0; i < A[0].Length; i++)
+        {
+            preCount[A[0][i] - 'a'] ++;
+        }
+        for(int j = 1; j < A.Length; j++)
+        {
+            
+            for(int k = 0; k < A[j].Length; k++)
+            {
+                nowCount[A[j][k] - 'a']++;
+            }
+            for(int index = 0; index < 26; index++)
+            {
+                preCount[index] = Math.Min(preCount[index],nowCount[index]);
+            }
+            Array.Clear(nowCount,0,26);
+        }
+        List<string> res = new List<string>();
+        for(int i = 0; i < 26; i++)
+        {
+            while(preCount[i] != 0)
+            {
+                res.Add(((char)(i + 'a')).ToString());
+                preCount[i]--;
+            }
+        }
+        return res;
+    }
+}

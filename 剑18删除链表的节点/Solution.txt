@@ -1,0 +1,8 @@
+题干：
+给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
+返回删除后的链表的头节点。
+注意：此题对比原题有改动
+
+解法：
+设置两个指针pre，now分别指向前后两个相邻节点，如果now指向的节点中的val等于目标val，那就将pre.next指向now.next，否则就将pre，now同时前移，直至now指向null，注意要判断头节点的val即为所删除的节点，此时直接返回head.next
+注：书原题中给的是删除的节点deleteNode，可以采用将deleteNode.next.val迁移到deleteNode.val上，然后将deletNode.next=deleteNode.next.next,注意要考虑删除节点为尾结点的情况，此时没有下一个节点可以做数据迁移，所以仍然只能顺序查找来删除该节点
