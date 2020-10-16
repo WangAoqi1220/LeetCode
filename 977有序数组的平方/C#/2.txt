@@ -1,0 +1,17 @@
+public class Solution 
+{
+    public int[] SortedSquares(int[] A) 
+    {
+        int[] res = new int[A.Length];
+        int head = 0, tail = A.Length - 1, pos = A.Length - 1;
+        while(head < tail)
+        {
+            if(A[head] * A[head] > A[tail] * A[tail])
+                res[pos--] = A[head] * A[head++];
+            else
+                res[pos--] = A[tail] * A[tail--];
+        }
+        res[pos] = A[head] * A[head];
+        return res;
+    }
+}
