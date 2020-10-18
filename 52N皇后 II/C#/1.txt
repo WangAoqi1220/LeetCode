@@ -1,0 +1,47 @@
+public class Solution 
+{
+
+    public int TotalNQueens(int n) 
+    {
+        List<int> columns = new List<int>();
+        List<int> diagonals1 = new List<int>();
+        List<int> diagonals2 = new List<int>();
+        return BackTrack(n, 0, columns, diagonals1, diagonals2);
+    }
+    public int BackTrack(int n, int row, List<int> columns, List<int> diagonals1, List<int> diagonals2) 
+    {
+        if (row == n) 
+        {
+            return 1;
+        } 
+        else 
+        {
+            int count = 0;
+            for (int i = 0; i < n; i++) 
+            {
+                if (columns.Contains(i)) 
+                {
+                    continue;
+                }
+                int diagonal1 = row - i;
+                if (diagonals1.Contains(diagonal1)) 
+                {
+                    continue;
+                }
+                int diagonal2 = row + i;
+                if (diagonals2.Contains(diagonal2)) 
+                {
+                    continue;
+                }
+                columns.Add(i);
+                diagonals1.Add(diagonal1);
+                diagonals2.Add(diagonal2);
+                count += BackTrack(n, row + 1, columns, diagonals1, diagonals2);
+                columns.Remove(i);
+                diagonals1.Remove(diagonal1);
+                diagonals2.Remove(diagonal2);
+            }
+            return count;
+        }
+    }
+}
