@@ -1,0 +1,33 @@
+public class Solution
+{
+    public bool IsMatch(string s, string p) 
+    {
+        bool[,] dp = new bool[s.Length + 1, p.Length + 1];
+        dp[0,0] = true;
+        for(int i = 1; i <= p.Length; i++)
+        {
+            if(p[i - 1] == '*')
+                dp[0,i] = dp[0, i - 2];
+        }
+        for(int j = 1; j <= s.Length; j++)
+        {
+            for(int k = 1; k <= p.Length; k++)
+            {
+                if(s[j - 1] == p[k - 1] || p[k - 1] == '.')
+                    dp[j, k] = dp[j - 1, k - 1];
+                else if(p[k - 1] == '*')
+                {
+                    if(p[k - 2] != s[j - 1] && p[k - 2] != '.')
+                    {
+                        dp[j, k] = dp[j, k - 2];
+                    }
+                    else
+                    {
+                        dp[j, k] = dp[j, k - 2]||dp[j, k - 1]||dp[j - 1, k];//0个，1个，多个
+                    }
+                }
+            }
+        }
+        return dp[s.Length, p.Length];
+    }
+}
