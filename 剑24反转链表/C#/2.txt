@@ -1,0 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution 
+{
+    public ListNode ReverseList(ListNode head) 
+    {
+        if(head == null)
+            return null;
+        Stack<ListNode> stack = new Stack<ListNode>();
+        ListNode index = head;
+        while(index != null)
+        {
+            stack.Push(index);
+            index = index.next;
+        }
+        index = stack.Peek();
+        while(stack.Count > 1)
+            stack.Pop().next = stack.Peek();
+        stack.Pop().next = null;
+        return index;
+    }
+}

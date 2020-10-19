@@ -1,0 +1,33 @@
+public class Solution 
+{
+    public int[] Exchange(int[] nums) 
+    {
+        int head = 0, tail = nums.Length - 1;
+        while(head < tail)
+        {
+            if(!IsEven(nums[head]%2))
+                head++;
+            if(IsEven(nums[tail]))
+                tail--;
+            if(head < tail && IsEven(nums[head]) && !IsEven(nums[tail]))
+            {
+                Swag(nums,head,tail);
+                head++;
+                tail--;
+            }                
+        }
+        return nums;
+    }
+    
+    public void Swag(int[] nums, int pos1, int pos2)
+    {
+        int tmp = nums[pos1];
+        nums[pos1] = nums[pos2];
+        nums[pos2] = tmp;
+    }
+    
+    public bool IsEven(int n)
+    {
+        return(n & 1) == 0;
+    }
+}
