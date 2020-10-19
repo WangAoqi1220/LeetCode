@@ -1,0 +1,45 @@
+public class Solution 
+{
+    public bool IsNumber(string s) 
+    {
+        if(s == null)
+            return false;
+        int index = 0;
+        while (index < s.Length && s[index] == ' ') 
+            index++;
+        bool numeric = ScanInteger(s, ref index);
+        
+        
+        if(index < s.Length && s[index] == '.')
+        {
+            ++index;
+            
+            numeric = ScanUnsignedInteger(s, ref index) || numeric;
+        }
+        if(index < s.Length - 1 && (s[index] == 'e' || s[index] == 'E'))
+        {
+            index++;
+            
+            numeric = numeric&&ScanInteger(s, ref index);
+        }
+        while (index < s.Length && s[index] == ' ') 
+            index++;
+        
+        return numeric&&index == s.Length;
+    }
+    
+    bool ScanUnsignedInteger(string s, ref int index)
+    {
+        int pre = index;
+        while(index < s.Length && s[index] >= '0' && s[index] <= '9')
+            index++;
+        return index > pre;
+    }
+    
+    bool ScanInteger(string s, ref int index)
+    {
+        if(index < s.Length && (s[index] == '+' || s[index] == '-'))
+            index++;
+        return ScanUnsignedInteger(s, ref index);
+    }
+}

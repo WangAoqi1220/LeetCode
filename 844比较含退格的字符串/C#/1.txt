@@ -1,0 +1,58 @@
+public class Solution 
+{
+    public bool BackspaceCompare(string S, string T) 
+    {
+        int index1 = S.Length - 1, index2 = T.Length - 1,SCount = 0,TCount = 0;
+        while(index1 >= 0 || index2 >= 0)
+        {
+            while(index1 >= 0)
+            {
+                if(S[index1] == '#')
+                {
+                    index1--;
+                    SCount++;
+                }
+                else if(SCount > 0)
+                {
+                    index1--;
+                    SCount--;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            while(index2 >= 0)
+            {
+                if(T[index2] == '#')
+                {
+                    index2--;
+                    TCount++;
+                }
+                else if(TCount > 0)
+                {
+                    index2--;
+                    TCount--;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if(index1 >= 0 && index2 >= 0) 
+            {
+                if (S[index1] != T[index2]) 
+                {
+                    return false;
+                }
+            }
+            else if(index1 >= 0 || index2 >= 0)
+            {
+                return false;
+            }
+            index1--;
+            index2--;
+        }
+        return true;
+    }
+}
