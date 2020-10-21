@@ -1,0 +1,28 @@
+public class Solution 
+{
+    public bool IsLongPressedName(string name, string typed) 
+    {
+        int typedPos = 0;
+        int namePos = 0;
+        int nameLen = name.Length;
+        int typedLen = typed.Length;
+        while(typedPos < typedLen)
+        {
+            if(namePos < nameLen && name[namePos] == typed[typedPos])
+            {
+                namePos++;
+                typedPos++;
+            }
+            else if(typedPos > 0 && typed[typedPos - 1] == typed[typedPos])
+            {
+                while(typedPos < typedLen && name[namePos - 1] == typed[typedPos])
+                    typedPos++;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return namePos == nameLen;
+    }
+}
