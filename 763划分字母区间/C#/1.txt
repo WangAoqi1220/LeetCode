@@ -1,0 +1,24 @@
+public class Solution 
+{
+    public IList<int> PartitionLabels(string S) 
+    {
+        int len = S.Length;
+        int[] last = new int[26];
+        for(int i = 0; i < len; i++)
+        {
+            last[S[i] - 'a'] = i;
+        }
+        int start = 0, end = 0;
+        List<int> res = new List<int>();
+        for(int j = 0; j < len; j++)
+        {
+            end = Math.Max(end, last[S[j] - 'a']);
+            if(j == end)
+            {
+                res.Add(end - start + 1);
+                start = end + 1;
+            }
+        }
+        return res;
+    }
+}
