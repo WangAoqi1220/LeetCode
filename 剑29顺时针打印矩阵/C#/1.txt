@@ -1,0 +1,51 @@
+public class Solution 
+{
+    public int[] SpiralOrder(int[][] matrix) 
+    {
+        if(matrix == null || matrix.Length == 0||matrix[0].Length == 0)
+            return new int[0];
+        int rows = matrix.Length;
+        int columns = matrix[0].Length;
+        int start = 0,pos = 0;
+        int[] res = new int[rows * columns];
+        
+        while(columns > start * 2 && rows > start * 2)
+        {
+            PrintMatrixInCircle(matrix,columns,rows,start++,res,ref pos);
+        }
+        return res;
+    }
+    
+    public void PrintMatrixInCircle(int[][] matrix, int columns, int rows, int start,int[] res,ref int pos)
+    {
+        int endX = columns - 1 - start;
+        int endY = rows - 1 - start;
+        
+        for(int i = start; i <= endX; i++)
+        {
+            res[pos++] = matrix[start][i];
+        }
+        
+        if(start < endY)
+        {
+            for(int j = start + 1; j <= endY; j++)
+            {
+                res[pos++] = matrix[j][endX];
+            }
+        }
+        if(start < endX && start < endY)
+        {
+            for(int k = endX - 1; k >= start; k--)
+            {
+                res[pos++] = matrix[endY][k];
+            }
+        }
+        if(start < endX && start < endY - 1)
+        {
+            for(int l = endY - 1; l >= start + 1; l--)
+            {
+                res[pos++] = matrix[l][start];
+            }
+        }
+    }
+}
