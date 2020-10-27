@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public IList<int> PreorderTraversal(TreeNode root) {
+        var Traversal = new List<int>();
+        if(root == null) return Traversal;
+         var S = new Stack<TreeNode>();
+         S.Push(root);
+
+        // I: 只压右孩子入栈
+        // while(S.Count != 0){
+        //     TreeNode cur = S.Pop();
+        //     while(cur != null){
+        //         Traversal.Add(cur.val);
+        //         S.Push(cur.right);
+        //         cur = cur.left;
+        //     }
+        // }
+
+        // II: 左右孩子全部要入栈
+        while(S.Count != 0){
+            TreeNode cur = S.Pop();
+            Traversal.Add(cur.val);
+            if(cur.right != null) S.Push(cur.right);
+            if(cur.left != null) S.Push(cur.left);
+        }
+        return Traversal;
+    }
+}
