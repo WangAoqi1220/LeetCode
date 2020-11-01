@@ -1,0 +1,49 @@
+public class Solution 
+{
+    public IList<string> WordBreak(string s, IList<string> wordDict) 
+    {
+        HashSet<string> wordSet = new HashSet<string>(wordDict);
+        int len = s.Length;
+        bool[] dp = new bool[len + 1];
+        dp[0] = true;
+        for(int right = 1; right <= len; right++)
+        {
+            for(int left = right - 1; left >= 0; left--)
+            {
+                if(wordSet.Contains(s.Substring(left,right - left)) && dp[left])
+                {
+                    dp[right] = true;
+                    break;
+                }              
+            }
+        }
+        List<string> res = new List<string>();
+        if (dp[len]) 
+        {
+            Stack<string> path = new Stack<string>();
+            dfs(s, len, wordSet, dp, path, res);
+            return res;
+        }
+        return res;
+    }
+    private void dfs(string s, int len, HashSet<string> wordSet, bool[] dp, Stack<string> path, List<string> res) 
+    {
+        if (len == 0) 
+        {
+            res.Add(String.Join(" ",path));
+            return;
+        }
+
+        // 可以拆分的左边界从 len - 1 依次枚举到 0
+        for (int i = len - 1; i >= 0; i--) 
+        {
+            string suffix = s.Substring(i, len - i);
+            if (wordSet.Contains(suffix) && dp[i]) 
+            {
+                path.Push(suffix);
+                dfs(s, i, wordSet, dp, path, res);
+                path.Pop();
+            }
+        }
+    }
+}

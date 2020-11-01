@@ -1,0 +1,46 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution 
+{
+    public int SumNumbers(TreeNode root) 
+    {
+        if (root == null) 
+            return 0;
+        int sum = 0;
+        Queue<TreeNode> nodeQueue = new Queue<TreeNode>();
+        Queue<int> numQueue = new Queue<int>();
+        nodeQueue.Enqueue(root);
+        numQueue.Enqueue(root.val);
+        while (nodeQueue.Count != 0) 
+        {
+            TreeNode node = nodeQueue.Dequeue();
+            int num = numQueue.Dequeue();
+            TreeNode left = node.left, right = node.right;
+            if (left == null && right == null) 
+            {
+                sum += num;
+            } 
+            else
+            {
+                if (left != null) 
+                {
+                    nodeQueue.Enqueue(left);
+                    numQueue.Enqueue(num * 10 + left.val);
+                }
+                if (right != null) 
+                {
+                    nodeQueue.Enqueue(right);
+                    numQueue.Enqueue(num * 10 + right.val);
+                }
+            }
+        }
+        return sum;
+    }
+}

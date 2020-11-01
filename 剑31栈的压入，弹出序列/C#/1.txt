@@ -1,0 +1,18 @@
+public class Solution 
+{
+    public bool ValidateStackSequences(int[] pushed, int[] popped) 
+    {
+        Stack<int> stack = new Stack<int>();
+        int poppedPos = 0;
+        foreach(int num in pushed)
+        {
+            stack.Push(num);
+            while(stack.Count != 0 && popped[poppedPos] == stack.Peek())
+            {
+                stack.Pop();
+                poppedPos++;
+            }
+        }
+        return stack.Count == 0;
+    }
+}

@@ -1,0 +1,59 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution 
+{
+    public IList<IList<int>> LevelOrder(TreeNode root) 
+    {
+        List<IList<int>> res = new List<IList<int>>();
+        List<int> list = new List<int>();
+        Stack<TreeNode> nowStack = new Stack<TreeNode>();
+        Stack<TreeNode> nextStack = new Stack<TreeNode>();
+        if(root != null)
+            nowStack.Push(root);
+        bool leftToRight = true;
+        while(nowStack.Count != 0)
+        {
+            TreeNode node = nowStack.Pop();
+            TreeNode left = node.left, right = node.right;
+            list.Add(node.val);
+            if(leftToRight)
+            {
+                if(left != null)
+                {
+                    nextStack.Push(left);
+                }
+                if(right != null)
+                {
+                    nextStack.Push(right);
+                }
+            }
+            else
+            {
+                if(right != null)
+                {
+                    nextStack.Push(right);
+                }
+                if(left != null)
+                {
+                    nextStack.Push(left);
+                }
+            }          
+            if(nowStack.Count == 0)
+            {
+                res.Add(list);
+                list = new List<int>();
+                nowStack = nextStack;
+                nextStack = new Stack<TreeNode>();
+                leftToRight = !leftToRight;
+            }
+        }
+        return res;
+    }
+}

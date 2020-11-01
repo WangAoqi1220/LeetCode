@@ -1,0 +1,22 @@
+public class Solution 
+{
+    public bool VerifyPostorder(int[] postorder) 
+    {
+        int start = 0, end = postorder.Length - 1;
+        return VerifyPart(postorder, start, end);
+    }
+    
+    public bool VerifyPart(int[] postorder, int start, int end)
+    {
+        if(start >= end)
+            return true;
+        int mid = postorder[end];  
+        int index = start;
+        while(postorder[index] < mid)
+            index++;
+        int midPos = index;
+        while(postorder[index] > mid)
+            index++;
+        return index == end&&VerifyPart(postorder, start, midPos - 1)&&VerifyPart(postorder, midPos, end - 1);
+    }
+}

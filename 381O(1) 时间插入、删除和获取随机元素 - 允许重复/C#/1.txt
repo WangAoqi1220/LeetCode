@@ -1,0 +1,49 @@
+public class RandomizedCollection 
+{
+    Dictionary<int, HashSet<int>> ranCol;
+    List<int> ranList;
+    /** Initialize your data structure here. */
+    public RandomizedCollection() 
+    {
+        ranCol = new Dictionary<int, HashSet<int>>();
+        ranList = new List<int>();
+    }
+    
+    /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
+    public bool Insert(int val) 
+    {
+        if (!ranCol.TryGetValue(val, out var hash))
+            {
+                hash = new HashSet<int>();
+                ranCol.Add(val, hash);
+            }
+            ranList.Add(val);
+            hash.Add(ranList.Count - 1);
+            return hash.Count <= 1;
+    }
+    
+    /** Removes a value from the collection. Returns true if the collection contained the specified element. */
+    public bool Remove(int val) 
+    {
+        if(!ranCol.ContainsKey(val) || ranCol[val].Count == 0)
+            return false;
+        ranList[ranCol[val].First()] = ranList.Last();
+        ranCol[val].Remove(ranCol[val].First());
+        ranList.RemoveAt(ranList.Count - 1);
+        return true;
+    }
+    
+    /** Get a random element from the collection. */
+    public int GetRandom() 
+    {
+        return ranList[new Random().Next(0,ranList.Count)];
+    }
+}
+
+/**
+ * Your RandomizedCollection object will be instantiated and called as such:
+ * RandomizedCollection obj = new RandomizedCollection();
+ * bool param_1 = obj.Insert(val);
+ * bool param_2 = obj.Remove(val);
+ * int param_3 = obj.GetRandom();
+ */
